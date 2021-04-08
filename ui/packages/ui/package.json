@@ -16,7 +16,7 @@
     "build:bundle-profile": "webpack --profile --json > stats.json",
     "bundle-profile:analyze": "yarn build:bundle-profile && webpack-bundle-analyzer ./stats.json",
     "clean": "rimraf dist",
-    "cy:test": "cypress run --config-file cypress.json"
+    "cy:test": "cypress run"
   },
   "devDependencies": {
     "@types/enzyme": "^3.9.0",
