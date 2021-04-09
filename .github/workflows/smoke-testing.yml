@@ -51,22 +51,15 @@ jobs:
           restore-keys: |
             dbzui-${{ runner.os }}-yarn-
 
-      - name: Build debezium-checkstyle
-        run: mvn clean install -f debezium/pom.xml -pl support/checkstyle -DskipTests -DskipITs
+      # - name: Build debezium-checkstyle
+      #   run: mvn clean install -f debezium/pom.xml -pl support/checkstyle -DskipTests -DskipITs
         
-      - name: Test Debezium UI
-        run: mvn clean install -f dbzui -B -Dformat.formatter.goal=validate -Dformat.imports.goal=check -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      # - name: Test Debezium UI
+      #   run: mvn clean install -f dbzui -B -Dformat.formatter.goal=validate -Dformat.imports.goal=check -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - name: Cypress E2E test
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: './dbzui/ui'
-          # we have already installed all dependencies above
-          install: false
-          wait-on: 'http://localhost:8080'
-          wait-on-timeout: 12000
-          browser: chrome
-          record: false
-          parallel: true
-          group: 'UI - Chrome'
-          spec: cypress/tests/ui/*
+        uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d
+      - name: Test
+        run: docker run --network container:webapp-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8080/
