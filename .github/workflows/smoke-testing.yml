@@ -58,9 +58,15 @@ jobs:
       #   run: mvn clean install -f dbzui -B -Dformat.formatter.goal=validate -Dformat.imports.goal=check -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - name: Cypress E2E test
-        working-directory: './dbzui/ui'
-        run: |
-          yarn install 
-          yarn start
-          yarn lint
-          yarn e2e:test
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: './dbzui/ui'
+          # we have already installed all dependencies above
+          install: false
+          wait-on: 'http://localhost:8080'
+          wait-on-timeout: 12000
+          browser: chrome
+          record: false
+          parallel: true
+          group: 'UI - Chrome'
+          spec: cypress/tests/ui/*
