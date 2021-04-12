@@ -10,7 +10,6 @@ on:
 jobs:
   dbzui-container:
     runs-on: ubuntu-latest
-    container: node:10.18-jessie
     env:
       DEBEZIUM_VERSION: "v1.5.0.Beta1"
 
