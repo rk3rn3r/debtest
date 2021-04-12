@@ -58,7 +58,8 @@ jobs:
         with:
           repository: uidoyen/debtest
           path: dbzui
-
+      - name: Docker build
+        run: ls -l
       - name: Docker build
         uses: docker/build-push-action@v2
         with:
