@@ -75,4 +75,9 @@ jobs:
           GROUP_ID: 1
           CONFIG_STORAGE_TOPIC: my_connect_configs
           OFFSET_STORAGE_TOPIC: my_connect_offsets
-          STATUS_STORAGE_TOPIC: my_connect_statuses        
+          STATUS_STORAGE_TOPIC: my_connect_statuses    
+              
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        uses: actions/checkout@v2            
