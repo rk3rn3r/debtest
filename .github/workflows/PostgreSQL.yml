@@ -89,7 +89,8 @@ jobs:
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Checkout Debezium UI
-        uses: actions/checkout@v2       
+        uses: actions/checkout@v2      
+         
       - name: Docker build
         uses: docker/build-push-action@v2
         with:
