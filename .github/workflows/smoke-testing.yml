@@ -19,7 +19,7 @@ jobs:
           repository: debezium/debezium
           ref: ${{ env.DEBEZIUM_VERSION }}
           path: debezium    
-  
+
       - name: Checkout Debezium UI
         uses: actions/checkout@v2
         with:
@@ -51,16 +51,23 @@ jobs:
           restore-keys: |
             dbzui-${{ runner.os }}-yarn-
 
+      - name: Build debezium-checkstyle
+        run: mvn clean install -f debezium/pom.xml -pl support/checkstyle -DskipTests -DskipITs
 
-              
-      - name: Cypress E2E test
+      - name: Test Debezium UI
+        run: mvn clean install -f dbzui -B -Dformat.formatter.goal=validate -Dformat.imports.goal=check -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      
+      # - name: Build the stack
+      #   run: docker-compose -f dbzui/docker-compose.yml up -d 
+  test:
+    runs-on: ubuntu-latest
+    container: cypress/included:3.8.3
+    steps:
+      - name: Checkout Debezium UI
         uses: actions/checkout@v2
-
-      - name: Build the stack
-        run: |
-          docker builder prune -a
-          docker image prune -a
-          docker-compose up -d
+        with:
+          repository: uidoyen/debtest
+          path: dbzui
           
-      - name: Test
-        run: docker run --network container:webapp-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8080/
+      - name: Run E2E test
+        run: cypress run --project ./dbzui/ui/packages/ui/e2e/
