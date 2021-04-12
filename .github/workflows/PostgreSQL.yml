@@ -52,12 +52,6 @@ jobs:
           ref: ${{ env.DEBEZIUM_VERSION }}
           path: debezium
 
-      - name: Checkout Debezium UI
-        uses: actions/checkout@v2
-        with:
-          repository: uidoyen/debtest
-          path: dbzui
-
       - name: Docker build
         run: ls -l
       - name: Docker build
