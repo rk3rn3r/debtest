@@ -70,4 +70,4 @@ jobs:
           path: dbzui
           
       - name: Run E2E test
-        run: cypress run
+        run: cypress run --project ./dbzui/ui/packages/ui/
