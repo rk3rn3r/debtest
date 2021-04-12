@@ -20,7 +20,7 @@ RUN microdnf install ca-certificates ${JAVA_PACKAGE} maven git \
     && echo "securerandom.source=file:/dev/urandom" >> /etc/alternatives/jre/lib/security/java.security
 
 USER 1001
-
+RUN DIR
 COPY pom.xml /javabuild/
 COPY backend/pom.xml /javabuild/backend/pom.xml
 COPY ui/pom.xml /javabuild/ui/pom.xml
