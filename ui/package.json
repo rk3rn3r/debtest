@@ -24,11 +24,6 @@
     "start": "lerna run start --scope=@debezium/ui",
     "e2e:test": "lerna run cy:test"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn build"
-    }
-  },
   "devDependencies": {
     "git-revision-webpack-plugin": "^3.0.6",
     "husky": "^4.3.7",
