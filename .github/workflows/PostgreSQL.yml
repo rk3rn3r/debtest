@@ -83,8 +83,6 @@ jobs:
   #       uses: actions/checkout@v2    
 
   dbzui-backend:
-    if: always()
-    needs: [dbzui-zookeeper, dbzui-kafka, dbzui-db-pg, dbzui-connect]
     runs-on: ubuntu-latest
     env:
       DEBEZIUM_VERSION: "v1.5.0.Beta1"
