@@ -115,10 +115,5 @@ jobs:
           repository: uidoyen/debtest
           path: dbzui
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          repository: uidoyen/debtest/dbzui/ui/packages/ui/
-          wait-on: 'http://localhost:8080'
-          browser: chrome
-          headless: true  
+      - name: Run E2E test
+        run: cypress run --project ./dbzui/ui/packages/ui/

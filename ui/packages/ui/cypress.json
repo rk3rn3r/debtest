@@ -1,1 +1,1 @@
-{ "$schema": "https://on.cypress.io/cypress.schema.json", "video": false }
+{ "baseUrl": "http://localhost:8080", "video": false }
