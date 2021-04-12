@@ -1,0 +1,23 @@
+name: PostgreSQL service
+on:
+  push:
+    branches:
+      - smokeWithCypress
+  pull_request:
+    branches:
+      - smokeWithCypress
+
+jobs:
+  postgres-job:
+    runs-on: ubuntu-latest
+    container: node:10.18-jessie
+
+    services:
+      postgres:
+        image: debezium/example-postgres:1.5
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+        ports:
+          - 65432:5432
