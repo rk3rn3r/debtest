@@ -93,5 +93,8 @@ jobs:
         with:
           repository: uidoyen/debtest
           path: dbzui
-      - name: Test     
-        run: docker build . --file Dockerfile --tag $USER/dbzui-backend-test:latest
+          
+      - name: List 
+        run: ls -l          
+      - name: Test
+        run: docker build . --file Dockerfile --tag dbzui-backend:$(date +%s)
