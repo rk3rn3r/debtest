@@ -5,12 +5,15 @@ ARG JAVA_PACKAGE=java-11-openjdk-headless
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 ENV JAVA_HOME="/usr/lib/jvm/jre-11"
 
+USER 1001
+
 RUN microdnf install ca-certificates ${JAVA_PACKAGE} maven git \
     && microdnf update \
     && microdnf clean all \
     && mkdir -p /javabuild/backend \
     && mkdir -p /javabuild/ui \
     && chown -R 1001 /javabuild \
+    && chown -R $USER:$USER /javabuild \
     && chmod -R "g+rwX" /javabuild \
     && chown -R 1001:root /javabuild \
     && mkdir -p /.cache/yarn \
@@ -18,8 +21,6 @@ RUN microdnf install ca-certificates ${JAVA_PACKAGE} maven git \
     && chmod -R "g+rwX" /.cache/yarn \
     && chown -R 1001:root /.cache/yarn \
     && echo "securerandom.source=file:/dev/urandom" >> /etc/alternatives/jre/lib/security/java.security
-
-USER 1001
 
 COPY pom.xml /javabuild/
 COPY backend/pom.xml /javabuild/backend/pom.xml
