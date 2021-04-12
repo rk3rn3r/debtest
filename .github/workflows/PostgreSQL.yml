@@ -58,14 +58,13 @@ jobs:
         with:
           repository: uidoyen/debtest
           path: dbzui
+
       - name: Docker build
         run: ls -l
       - name: Docker build
         uses: docker/build-push-action@v2
         with:
-          repository: uidoyen/debtest
-          path: dbzui
-          context: .
+          context: ./dbzui/Dockerfile
           push: false
           tags: user/dbzui-backend:latest
 
