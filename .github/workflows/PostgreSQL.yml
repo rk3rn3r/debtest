@@ -93,4 +93,4 @@ jobs:
       - name: List 
         run: ls -l          
       - name: Test
-        run: docker build . --file dbzui/Dockerfile --tag dbzui-backend:$(date +%s)
+        run: docker build . --file Dockerfile --tag dbzui-backend:$(date +%s)
