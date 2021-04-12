@@ -46,14 +46,22 @@ jobs:
           STATUS_STORAGE_TOPIC: my_connect_statuses   
 
     steps:
+      - name: Checkout Debezium main repository
+        uses: actions/checkout@v2
+        with:
+          repository: debezium/debezium
+          ref: ${{ env.DEBEZIUM_VERSION }}
+          path: debezium  
+
       - name: Checkout Debezium UI
         uses: actions/checkout@v2
+        with:
+          repository: uidoyen/debtest
+          path: dbzui
 
       - name: Docker build
         uses: docker/build-push-action@v2
         with:
-          repository: uidoyen/debtest
-          path: dbzui
           context: .
           push: false
           tags: user/dbzui-backend:latest
