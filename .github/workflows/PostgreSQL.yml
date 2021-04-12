@@ -14,9 +14,6 @@ jobs:
     services:
       zookeeper:
         image: debezium/zookeeper:1.5
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
 
   # dbzui-kafka:
   #   if: always()
