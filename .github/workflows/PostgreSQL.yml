@@ -8,12 +8,32 @@ on:
       - smokeWithCypress
 
 jobs:
-  dbzui-zookeeper:
+  dbzui-container:
     runs-on: ubuntu-latest
-
+    container: node:10.18-jessie
+    
     services:
       zookeeper:
         image: debezium/zookeeper:1.5
+
+      kafka:
+        image: debezium/kafka:1.5
+        ports:
+          - 9092:9092
+        env: 
+          ZOOKEEPER_CONNECT: dbzui-zookeeper:2181
+
+      postgres:
+        image: debezium/example-postgres:1.5
+        ports:
+          - 65432:5432
+        env: 
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
 
   # dbzui-kafka:
   #   if: always()
@@ -77,27 +97,27 @@ jobs:
   #     - name: Check out repository code
   #       uses: actions/checkout@v2    
 
-  dbzui-backend:
-    runs-on: ubuntu-latest
-    env:
-      DEBEZIUM_VERSION: "v1.5.0.Beta1"
-    steps:
-      # Downloads a copy of the code in your repository before running CI tests
-      - name: Checkout Debezium UI
-        uses: actions/checkout@v2    
-      -   
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+  # dbzui-backend:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     DEBEZIUM_VERSION: "v1.5.0.Beta1"
+  #   steps:
+  #     # Downloads a copy of the code in your repository before running CI tests
+  #     - name: Checkout Debezium UI
+  #       uses: actions/checkout@v2    
+  #     -   
+  #       name: Set up QEMU
+  #       uses: docker/setup-qemu-action@v1
+  #     -
+  #       name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v1
 
-      - name: Docker build
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: false
-          tags: user/dbzui-backend:latest
+  #     - name: Docker build
+  #       uses: docker/build-push-action@v2
+  #       with:
+  #         context: .
+  #         push: false
+  #         tags: user/dbzui-backend:latest
 
   headless-chrome:
     # if: always()
