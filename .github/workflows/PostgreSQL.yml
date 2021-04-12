@@ -51,7 +51,7 @@ jobs:
         with:
           repository: debezium/debezium
           ref: ${{ env.DEBEZIUM_VERSION }}
-          path: debezium  
+          path: debezium
 
       - name: Checkout Debezium UI
         uses: actions/checkout@v2
@@ -63,7 +63,7 @@ jobs:
       - name: Docker build
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./dbzui
           push: false
           tags: user/dbzui-backend:latest
 
