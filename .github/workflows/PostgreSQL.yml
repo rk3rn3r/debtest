@@ -9,7 +9,7 @@ on:
 
 jobs:
   dbzui-container:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       DEBEZIUM_VERSION: "v1.5.0.Beta1"
 
