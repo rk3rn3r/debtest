@@ -58,8 +58,8 @@ jobs:
       - name: Docker build
         run: ls -l
 
-      # - name: Docker build
-      #   run: docker build . --file ./dbzui/Dockerfile --tag dbzui-backend:$(date +%s)
+      - name: Docker build
+        run: docker build . --file Dockerfile --tag dbzui-backend:$(date +%s)
 
   # dbzui-kafka:
   #   if: always()
