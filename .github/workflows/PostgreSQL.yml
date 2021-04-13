@@ -55,6 +55,9 @@ jobs:
       - name: Checkout Debezium UI
         uses: actions/checkout@v2
 
+      - name: Folder list
+        run: ls -l
+
       - name: Docker build
         run: sudo usermod -a -G docker root
 
