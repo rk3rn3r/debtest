@@ -13,7 +13,7 @@ RUN microdnf install ca-certificates ${JAVA_PACKAGE} maven git \
     && chown -R 1001 /javabuild \
     && chmod -R "g+rwX" /javabuild \
     && chown -R 1001:root /javabuild \
-    && chmod -R 777 /javabuild \
+    && chmod -R 777 /javabuild/ui \
     && mkdir -p /.cache/yarn \
     && chown -R 1001 /.cache/yarn \
     && chmod -R "g+rwX" /.cache/yarn \
