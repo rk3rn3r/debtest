@@ -81,8 +81,6 @@ jobs:
 
       - name: Folder list
         run: ls -l
-      - name: Folder list
-        run: sudo chmod -R 777 /github
 
         
 

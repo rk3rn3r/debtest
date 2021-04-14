@@ -31,8 +31,6 @@ RUN mvn -am clean dependency:go-offline
 
 COPY . /javabuild/
 
-RUN  sudo chmod -R 777 /javabuild/ui
-
 RUN mvn -am package -Dquarkus.package.type=fast-jar
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.3
