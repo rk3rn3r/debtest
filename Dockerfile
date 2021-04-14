@@ -10,7 +10,6 @@ RUN microdnf install ca-certificates ${JAVA_PACKAGE} maven git \
     && microdnf clean all \
     && mkdir -p /javabuild/backend \
     && mkdir -p /javabuild/ui \
-    && sudo chmod -R 777 /javabuild \
     && chown -R 1001 /javabuild \
     && chmod -R "g+rwX" /javabuild \
     && chown -R 1001:root /javabuild \
@@ -31,6 +30,8 @@ WORKDIR /javabuild
 RUN mvn -am clean dependency:go-offline
 
 COPY . /javabuild/
+
+RUN  chmod -R 777 /javabuild
 
 RUN mvn -am package -Dquarkus.package.type=fast-jar
 
