@@ -9,7 +9,7 @@ on:
 
 jobs:
   dbzui-container:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       DEBEZIUM_VERSION: "v1.5.0.Beta1"
 
@@ -59,10 +59,7 @@ jobs:
         run: ls -l
 
       - name: Docker build
-        run: sudo usermod -a -G docker root
-
-      - name: Docker build
-        run: docker build . --file Dockerfile --tag dbzui-backend:$(date +%s)
+        run: sudo docker build . --file Dockerfile --tag dbzui-backend:$(date +%s)
 
   # dbzui-kafka:
   #   if: always()
