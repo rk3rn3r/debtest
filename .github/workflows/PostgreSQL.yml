@@ -21,7 +21,7 @@ jobs:
         ports:
           - 9092:9092
         env: 
-          ZOOKEEPER_CONNECT: dbzui-zookeeper:2181
+          ZOOKEEPER_CONNECT: zookeeper:2181
 
       postgres:
         image: debezium/example-postgres:1.5
@@ -37,7 +37,7 @@ jobs:
           - 8083:8083
 
         env:
-          BOOTSTRAP_SERVERS: dbzui-kafka:9092
+          BOOTSTRAP_SERVERS: kafka:9092
           GROUP_ID: 1
           CONFIG_STORAGE_TOPIC: my_connect_configs
           OFFSET_STORAGE_TOPIC: my_connect_offsets
@@ -81,6 +81,10 @@ jobs:
 
       - name: Folder list
         run: ls -l
+      - name: Folder list
+        run: sudo chmod -R 777 /github
+
+        
 
       - name: Docker build
         run: sudo docker build . --file Dockerfile --tag dbzui-backend:$(date +%s)
